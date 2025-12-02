@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+  let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+let intentos = 0;
+let adivinado = false;
+
+while (!adivinado) {
+    let entrada = prompt("Adivina el número secreto (entre 1 y 100):");
+    let numero = Number(entrada);
+    intentos++;
+
+    if (numero === numeroSecreto) {
+        alert("OLE! El número era " + numeroSecreto +
+              "\nIntentos: " + intentos);
+        adivinado = true;
+    } else if (numero > numeroSecreto) {
+        alert("El número es menor");
+    } else if (numero < numeroSecreto) {
+        alert("El número es mayor");
+    } else {
+        alert("No vale, prueba otra vez");
+    }
+}
+</script>
