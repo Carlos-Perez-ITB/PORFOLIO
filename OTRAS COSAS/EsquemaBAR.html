@@ -1,0 +1,62 @@
+──────────────────────────────────────────────────────────────
+                 BOOSTAR – AR ARCHITECTURE (NATIVE)
+──────────────────────────────────────────────────────────────
+
+                  ┌────────────────────────┐
+                  │      UI Layer (KMP)    │
+                  │  Kotlin Multiplatform  │
+                  │────────────────────────│
+                  │ Pantallas BoostAR      │
+                  │ Navegación / Estado    │
+                  │ Botón “Activar AR”     │
+                  └───────────┬────────────┘
+                              │
+                              ▼
+              ┌──────────────────────────────────┐
+              │     AR Controller (Android)      │
+              │  Kotlin / Android Studio Native  │
+              │──────────────────────────────────│
+              │ Inicializa sesión AR             │
+              │ Administra pipeline               │
+              │ Configura Vuforia (sin ARCore)    │
+              │ Coordina MediaPipe + Render       │
+              └─────────────────┬────────────────┘
+                                │
+             ┌──────────────────┼──────────────────┐
+             ▼                  ▼                  ▼
+
+┌────────────────────┐  ┌────────────────────────┐ ┌─────────────────────┐
+│   VUFORIA ENGINE   │  │   MEDIAPIPE PIPELINE   │ │   3D RENDER ENGINE  │
+│ (Sin ARCore/Marker)│  │   (Body + Hands + Face)│ │   (Scene Renderer)  │
+│────────────────────│  │────────────────────────│ │─────────────────────│
+│ Device Tracking     │  │ Pose Detection (33 KP)│ │ Render Model 3D     │
+│ SLAM Propietario    │  │ Segmentation          │ │ Actualizar Pose      │
+│ Ground Plane        │  │ Depth/Geometry (opt.) │ │ Animación / Física   │
+│ HitTest (Toque)     │  │ Tracking tiempo real  │ │ Iluminación básica   │
+│ Anchor 3D           │  └────────────────────────┘ └──────────┬──────────┘
+└──────────┬─────────┘                                         │
+           │                                                   │
+           ▼                                                   ▼
+
+      ┌──────────────────────────────────────────────────────────────┐
+      │            BOOSTAR FASHION ENGINE (IA / LÓGICA)              │
+      │──────────────────────────────────────────────────────────────│
+      │ ▸ Ajuste de ropa a la pose del cuerpo (rig / weight)         │
+      │ ▸ Ajuste dinámico según keypoints de MediaPipe               │
+      │ ▸ Corrección de colisiones y físicas básicas                 │
+      │ ▸ Reemplazo de outfit / capas de ropa                        │
+      │ ▸ Generación de lógica de estilo (GPT especializado moda)    │
+      └───────────────────────────────────────────────┬──────────────┘
+                                                      │
+                                                      ▼
+
+                  ┌────────────────────────┐
+                  │ Output AR Final        │
+                  │────────────────────────│
+                  │ Objeto 3D anclado      │
+                  │ Ropa ajustada al cuerpo│
+                  │ Movimiento fluido      │
+                  │ Captura / Grabación    │
+                  └────────────────────────┘
+
+──────────────────────────────────────────────────────────────
