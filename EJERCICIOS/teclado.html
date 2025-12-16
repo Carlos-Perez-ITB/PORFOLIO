@@ -40,6 +40,8 @@
     <div id="teclado"></div>
     <button onclick="borrarLetra()">Borrar Letra</button>
     <button onclick="comprobar()">Comprobar</button>
+    
+    
     <script>
         //Cojo el div del teclado, para luego ir añadiendo
         let teclado = document.getElementById("teclado");
@@ -99,6 +101,22 @@
             teclado.appendChild(tecla);
 
         }
+        palabraSecreta();
+
+        let palabra = "";
+        function palabraSecreta() {
+            fetch('https://random-word-api.herokuapp.com/word?lang=es&length=5')
+                .then(response => response.json())
+                .then(data => {
+                    palabra = data[0]; // La API devuelve un array, ej: ["perro"]
+
+                    palabra = palabra.toUpperCase();
+                    console.log("Tu palabra secreta es:", palabra);
+
+                });
+
+        }
+
 
         function letrateclado(letra) {
             alert("Has pulsado la letra " + letra);
@@ -127,16 +145,16 @@
 
         }
 
-        function comprobar(){
+        function comprobar() {
             let miTexto = document.getElementById("miTexto");
-            if(miTexto.textContent == "MEDIA"){
+            if (miTexto.textContent == palabra) {
                 miTexto.style.background = "green";
                 alert("Correcto");
             }
-            else{
+            else {
                 miTexto.style.background = "red";
                 alert("Incorrecto");
-            }           
+            }
         }
     </script>
 </body>
