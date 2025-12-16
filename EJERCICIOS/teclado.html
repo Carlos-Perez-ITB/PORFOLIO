@@ -107,7 +107,14 @@
         function escribeTecla(letra){
             console.log(letra);
             let miTexto = document.getElementById("miTexto");
-            miTexto.textContent += letra
+
+            if (miTexto.textContent.length < 5){
+                miTexto.textContent += letra;
+                console.log("En miTexto hay " + miTexto.textContent.length + " caracteres");
+            }
+            else {
+                alert("No se pueden escribir más de 5 caracteres");
+            }
         }
     </script>
 </body>
