@@ -35,6 +35,15 @@
         //Cojo el div del teclado, para luego ir añadiendo
         let teclado = document.getElementById("teclado");
 
+        for (let i = 65; i < 91; i++) {
+            //Creo la tecla
+            let tecla = document.createElement("div");
+            tecla.innerHTML = "<p>" + String.fromCharCode(i) + "</p>";
+            tecla.className = "tecla";
+
+            teclado.appendChild(tecla);
+        }
+
         for (let i = 0; i < 10; i++) {
             //Creo la tecla
             let tecla = document.createElement("div");
