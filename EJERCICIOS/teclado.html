@@ -27,7 +27,7 @@
             width: 500px;
             height: 50px;
             background-color: blue;
-            
+
 
         }
     </style>
@@ -37,9 +37,9 @@
 <body>
     <h1 id="titulo">Teclado númerico</strong></h1>
     <div id="miTexto" class="miTexto"></div>
-    <div id="teclado">
-
-    </div>
+    <div id="teclado"></div>
+    <button onclick="borrarLetra()">Borrar Letra</button>
+    <button onclick="comprobar()">Comprobar</button>
     <script>
         //Cojo el div del teclado, para luego ir añadiendo
         let teclado = document.getElementById("teclado");
@@ -93,28 +93,50 @@
             let tecla = document.createElement("div");
             tecla.innerHTML = "<p>" + String.fromCharCode(i) + "</p>";
             tecla.className = "tecla";
-            
-            let letra= String.fromCharCode(i);
-            tecla.setAttribute("onclick", "escribeTecla('"+ letra +"')");
+
+            let letra = String.fromCharCode(i);
+            tecla.setAttribute("onclick", "escribeTecla('" + letra + "')");
             teclado.appendChild(tecla);
-            
+
         }
 
-        function letrateclado(letra){
+        function letrateclado(letra) {
             alert("Has pulsado la letra " + letra);
         }
 
-        function escribeTecla(letra){
+        function escribeTecla(letra) {
             console.log(letra);
             let miTexto = document.getElementById("miTexto");
 
-            if (miTexto.textContent.length < 5){
+            if (miTexto.textContent.length < 5) {
                 miTexto.textContent += letra;
                 console.log("En miTexto hay " + miTexto.textContent.length + " caracteres");
             }
             else {
-                alert("No se pueden escribir más de 5 caracteres");
+                miTexto.style.background = "red";
+
             }
+        }
+
+        function borrarLetra() {
+            let miTexto = document.getElementById("miTexto");
+            if (miTexto.textContent.length > 0) {
+                miTexto.style.background = "blue";
+                miTexto.textContent = miTexto.textContent.slice(0, -1);
+            }
+
+        }
+
+        function comprobar(){
+            let miTexto = document.getElementById("miTexto");
+            if(miTexto.textContent == "MEDIA"){
+                miTexto.style.background = "green";
+                alert("Correcto");
+            }
+            else{
+                miTexto.style.background = "red";
+                alert("Incorrecto");
+            }           
         }
     </script>
 </body>
