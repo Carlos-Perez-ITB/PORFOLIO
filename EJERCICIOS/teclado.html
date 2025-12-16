@@ -22,12 +22,21 @@
             flex-wrap: wrap;
             width: 1300px;
         }
+
+        .miTexto {
+            width: 500px;
+            height: 50px;
+            background-color: blue;
+            
+
+        }
     </style>
     <title>Ejemplo 1 - Hello World JS</title>
 </head>
 
 <body>
     <h1 id="titulo">Teclado númerico</strong></h1>
+    <div id="miTexto" class="miTexto"></div>
     <div id="teclado">
 
     </div>
@@ -35,7 +44,7 @@
         //Cojo el div del teclado, para luego ir añadiendo
         let teclado = document.getElementById("teclado");
 
-        
+
 
         for (let i = 0; i < 10; i++) {
             //Creo la tecla
@@ -78,14 +87,27 @@
             //Añado la tecla al teclado
             teclado.appendChild(tecla);
         }
-        
+
         for (let i = 65; i < 91; i++) {
             //Creo la tecla
             let tecla = document.createElement("div");
             tecla.innerHTML = "<p>" + String.fromCharCode(i) + "</p>";
             tecla.className = "tecla";
-
+            
+            let letra= String.fromCharCode(i);
+            tecla.setAttribute("onclick", "escribeTecla('"+ letra +"')");
             teclado.appendChild(tecla);
+            
+        }
+
+        function letrateclado(letra){
+            alert("Has pulsado la letra " + letra);
+        }
+
+        function escribeTecla(letra){
+            console.log(letra);
+            let miTexto = document.getElementById("miTexto");
+            miTexto.textContent += letra
         }
     </script>
 </body>
