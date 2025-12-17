@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-   <script src="CuadriculaWordle.js"></script> 
+<script src="CuadriculaWordle.js"></script>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .fila {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .celda {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         .tecla {
             width: 100px;
             height: 100px;
@@ -39,10 +55,12 @@
     <h1 id="titulo">Teclado númerico</strong></h1>
     <div id="miTexto" class="miTexto"></div>
     <div id="teclado"></div>
+    <div id="fila"></div>
+    <div id="celda"></div>
     <button onclick="borrarLetra()">Borrar Letra</button>
     <button onclick="comprobar()">Comprobar</button>
-    
-    
+
+
     <script>
         //Cojo el div del teclado, para luego ir añadiendo
         let teclado = document.getElementById("teclado");
