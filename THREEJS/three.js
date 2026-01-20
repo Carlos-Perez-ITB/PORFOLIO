@@ -3,6 +3,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const radius = 1;
 const rings = 15;
+let walkTime = 0;
+const walkSpeed = 0.05;
+const walkAmplitude = 0.6;
 
 // --- A. CONFIGURACIÓN BÁSICA ---
 //Escene
@@ -127,10 +130,20 @@ function animate() {
     // Pequeña rotación automática
     cube.rotation.y += 0;
     cube.rotation.x += 0;
-    armPivotL.rotation.x += 0.01;
-    armR.rotation.x -= 0.01;
-    legL.rotation.x -= 0.01;
-    legR.rotation.x += 0.01;
+
+     walkTime += walkSpeed;
+
+    // Brazos (opuestos entre sí)
+    armL.rotation.x = Math.sin(walkTime) * walkAmplitude;
+    armR.rotation.x = Math.sin(walkTime + Math.PI) * walkAmplitude;
+
+    // Piernas (opuestas entre sí)
+    legL.rotation.x = Math.sin(walkTime + Math.PI) * walkAmplitude;
+    legR.rotation.x = Math.sin(walkTime) * walkAmplitude;
+
+    // Ligero balanceo del cuerpo
+    cube.rotation.y = Math.sin(walkTime) * 0.05;
+
 
     controls.update(); // Necesario por el damping
     renderer.render(scene, camera);
