@@ -62,39 +62,54 @@ const material3 = new THREE.MeshStandardMaterial({
 
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+
+//Cabeza
 const sphere = new THREE.Mesh(geometry2, material3);
 sphere.position.y = 2.5;
 scene.add(sphere);
+
+//Brazos 
 const armL = new THREE.Mesh(geometry3, material);
 armL.position.x = 1.3;
 armL.position.y = -0.5;
 scene.add(armL);
+
+
 const armR = new THREE.Mesh(geometry4, material);
 armR.position.x = -1.3;
 armR.position.y=-0.5;
 scene.add(armR);
+
+//Piernas
 const legL = new THREE.Mesh(geometry5, material2);
 legL.position.x = 0.5;
 legL.position.y = -2.5;
 scene.add(legL);
+
 const legR = new THREE.Mesh(geometry6, material2);
 legR.position.x = -0.5;
 legR.position.y = -2.5;
 scene.add(legR);
+
+//Pies
 const feetL = new THREE.Mesh(geometry7, material2);
 feetL.position.x = 0.5;
 feetL.position.y = -5;
 feetL.position.z = 0.25;
 scene.add(feetL);
+
 const feetR = new THREE.Mesh(geometry8, material2);
 feetR.position.x = -0.5;
 feetR.position.y = -5;
 feetR.position.z = 0.25;
 scene.add(feetR);
+
+//Gorra
 const baseCap = new THREE.Mesh (geomatry9, material2);
 baseCap.position.y = 3;
 baseCap.position.z = 0.4;
 scene.add(baseCap);
+
 const cap = new THREE.Mesh(geometry10, material2);
 cap.position.y = 4;
 scene.add(cap);
@@ -112,6 +127,10 @@ function animate() {
     // Pequeña rotación automática
     cube.rotation.y += 0;
     cube.rotation.x += 0;
+    armPivotL.rotation.x += 0.01;
+    armR.rotation.x -= 0.01;
+    legL.rotation.x -= 0.01;
+    legR.rotation.x += 0.01;
 
     controls.update(); // Necesario por el damping
     renderer.render(scene, camera);
