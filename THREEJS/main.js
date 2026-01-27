@@ -2,6 +2,14 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'GLTFLoader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+let model = null;
+let fondoBlanco = false;
+
 // ESCENA
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x090909);
@@ -22,7 +30,7 @@ document.body.appendChild(renderer.domElement);
 
 // LUZ
 scene.add(new THREE.AmbientLight(0xffffff, 1));
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
 directionalLight.position.set(5, 10, 7.5);
 scene.add(directionalLight);
 
@@ -33,7 +41,8 @@ const loader = new GLTFLoader();
 loader.load(
   'Enma.glb',
   function (gltf) {
-    scene.add(gltf.scene);
+    model = gltf.scene;
+    scene.add(model);
   },
   undefined,
   function (error) {
@@ -57,5 +66,29 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+
+
+//Codigo con click --> Al cliclar sobre el model, el color de la escena cambia a blanco
+
+window.addEventListener('click', (event) => {
+  // Coordenadas normalizadas del ratón (-1 a 1)
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  if (!model) return;
+
+  const intersects = raycaster.intersectObject(model, true);
+
+  if (intersects.length > 0) {
+    // Toggle del fondo
+    fondoBlanco = !fondoBlanco;
+    scene.background = new THREE.Color(
+      fondoBlanco ? 0xffffff : 0x090909
+    );
+  }
 });
 
