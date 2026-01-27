@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const radius = 1;
 const rings = 15;
 let walkTime = 0;
 const walkSpeed = 0.05;
 const walkAmplitude = 0.6;
+const loader = new GLTFLoader();
 
 // --- A. CONFIGURACIÓN BÁSICA ---
 //Escene
@@ -157,3 +159,4 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
